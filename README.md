@@ -27,6 +27,43 @@ methods, functions, and the like.*
 **Ward Cunningham**  inventor of Wiki, inventor of Fit, coinventor of eXtreme Programming. Motive force behind Design Patterns. Smalltalk and OO thought leader. The godfather of all those who care about code :  
 *You know you are working on clean code when each routine you read turns out to be pretty much what you expected. You can call it beautiful code when the code also makes it look like the language was made for the problem.*  
 
+## Chapter 2 : meaningful Names  
+
+1. Use Intention-Revealing Names  
+2. Avoid Disinformation  
+3. Make Meaningful Distinctions : Noise words  
+4. Use Pronounceable Names  
+5. Use Searchable Names  
+6. Avoid Encodings  
+7. Hungarian Notation   
+8. Class Names :
+Classes and objects should have noun or noun phrase names like Customer, WikiPage, Account, and AddressParser. Avoid words like Manager, Processor, Data, or Info in the name of a class. A class name should not be a verb.  
+9. Don’t Pun :
+Avoid using the same word for two purposes. Using the same term for two different ideas is essentially a pun.  
+
+## Chapter 3 : Function
+
+1. The first rule of functions is that they should be small. The second rule of functions is that *they should be smaller than that.*  
+2. FUNCTIONS SHOULD DO ONE THING. THEY SHOULD DO IT WELL. THEY SHOULD DO IT ONLY.  
+3. Functions should either do something or answer something, but not both.  
+4. Function Arguments
+The ideal number of arguments for a function is zero (*niladic*). Next comes one (*monadic*), followed closely by two (dyadic). Three arguments (*triadic*) should be avoided where possible. More than three (*polyadic*) requires very special justification and then shouldn’t be used anyway.  
+5. Anything that forces you to check the function signature is equivalent to a double-take. It’s a cognitive break like  `appendFooter(s);` should be avoided.  
+6. Functions should do **one thing**. Error handing is one thing. Thus, a function that handles errors should do nothing else. This implies (as in the example above) that if the keyword try exists in a function, it should be the very first word in the function and that there should be nothing after the catch/finally blocks.  
+7. Structured Programming
+Some programmers follow Edsger Dijkstra’s rules of structured programming.14 Dijkstra said that every function, and every block within a function, should have *one entry and one exit*. Following these rules means that there should only be one `return` statement in a function, no `break` or `continue` statements in a loop, and never, ever, any `goto` statements.
+
+####  How to write function :
+Writing software is like any other kind of writing. When you write a paper or an article, you get your thoughts down first, then you massage it until it reads well. The first draft might be clumsy and disorganized, so you wordsmith it and restructure it and refine it until it reads the way you want it to read.
+
+When I write functions, they come out long and complicated. They have lots of indenting and nested loops. They have long argument lists. The names are arbitrary, and there is duplicated code. But I also have a suite of unit tests that cover every one of those clumsy lines of code.
+So then I massage and refine that code, splitting out functions, changing names, eliminating duplication. I shrink the methods and reorder them. Sometimes I break out whole classes, all the while keeping the tests passing.
+
+In the end, I wind up with functions that follow the rules I’ve laid down in this chapter. I don’t write them that way to start. I don’t think anyone could.
+
+
+
+
 
 ## Quotes :
 
@@ -38,7 +75,15 @@ bad does not mean that we know how to paint.
 5. Being able to recognize clean code from dirty code does not mean that we know how to write clean code!  
 6. When the same thing is done over and over, it’s a sign that there is an idea in our mind that is not well represented in the code. I try to figure out what it is. Then I try to express that idea more clearly.  
 7. Beautiful code makes the language look like it was made for the problem!  
-8. 
+8. Making Code easy to read actually makes it easier to write.  
+9. Continuous improvement is an intrinsic part of professionalism.  
+10. Choosing good names takes time but saves more than it takes.  
+11. The problem isn’t the simplicity of the code but the implicity of the code.  
+12. Programmers create problems for themselves when they write code solely to satisfy a compiler or interpreter.  
+13. The length of a name should correspond to the size of its scope.  
+14. Choose clarity over entertainment. e.g. `HolyHandGrenade` vs `DeleteItems`.  
+15. Duplication may be the root of all evil in software.  
+16. Master programmers think of systems as stories to be told rather than programs to be written.  
 
 
 [1]: https://www.amazon.com/gp/product/B001GSTOAM
