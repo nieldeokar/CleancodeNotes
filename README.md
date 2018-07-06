@@ -2,16 +2,6 @@
 This repo contains notes from book [Clean Code : A Handbook of Agile Software Craftsmanship by Robert C. Martin][1]
 
 
-## Quotes :
-
-1. It was the bad code that brought the company down.  
-2. LeBlanc’s law: Later equals never.  
-3. But the fault, dear Dilbert, is not in our stars, but in ourselves. We are unprofessional.  
-4. Writing clean code is a lot like painting a picture. Being able to recognize good art from
-bad does not mean that we know how to paint.  
-5. Being able to recognize clean code from dirty code does not mean that we know how to write clean code!  
-6. When the same thing is done over and over, it’s a sign that there is an idea in our mind that is not well represented in the code. I try to figure out what it is. Then I try to express that idea more clearly.  
-
 ### What is clean code ?
 **Bjarne Stroustrup** inventor of C++ :  
 *I like my code to be elegant and efficient. The logic should be straightforward to make it hard for bugs to hide, the dependencies minimal to ease maintenance, error handling complete according to an articulated strategy, and performance close to optimal so as not to tempt people to make the code messy with unprincipled optimizations. Clean code does one thing well.*  
@@ -38,7 +28,17 @@ methods, functions, and the like.*
 *You know you are working on clean code when each routine you read turns out to be pretty much what you expected. You can call it beautiful code when the code also makes it look like the language was made for the problem.*  
 
 
+## Quotes :
 
+1. It was the bad code that brought the company down.  
+2. LeBlanc’s law: Later equals never.  
+3. But the fault, dear Dilbert, is not in our stars, but in ourselves. We are unprofessional.  
+4. Writing clean code is a lot like painting a picture. Being able to recognize good art from
+bad does not mean that we know how to paint.  
+5. Being able to recognize clean code from dirty code does not mean that we know how to write clean code!  
+6. When the same thing is done over and over, it’s a sign that there is an idea in our mind that is not well represented in the code. I try to figure out what it is. Then I try to express that idea more clearly.  
+7. Beautiful code makes the language look like it was made for the problem!  
+8. 
 
 
 [1]: https://www.amazon.com/gp/product/B001GSTOAM
