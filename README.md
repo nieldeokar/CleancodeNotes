@@ -107,12 +107,22 @@ while{
 - Nonlocal Information  
 - Too Much Information *Very long 8-10 lines of comments*
 - Inobvious Connection  
-- Function Headers 
+- Function Headers
+
+## Chapter 5 Formatting :
+- The Newspaper Metaphor  
+- In code each blank line is a visual cue that identifies a new and separate concept.
+- Vertical Density : it implies close association.  So lines of code that are tightly related should appear vertically dense.  
+- Vertical Distance : Concepts that are closely related should be kept vertically close to each other.  
+- **Variable Declarations** Variables should be declared as close to their usage as possible. Because our functions are very short, local variables should appear a the top of each function.  
+- **Instance variables** on the other hand, should be declared at the top of the class. This should not increase the vertical distance of these variables.
+- **Dependent Functions** If one function calls another, they should be vertically close, and the caller should be above the callee.  
+- **Conceptual Affinity** Certain bits of code want to be near other bits. They have a certain conceptual affinity. The stronger that affinity, the less vertical distance there should be between them.  
+- **Vertical Ordering** In general we want function call dependencies to point in the downward direction. That is, a function that is called should be below a function that does the calling.
+- Team Rules  
+- [Uncle Bob’s Formatting Rules](Examples/CodeAnalyzer.java) 
 
 
-
-
-## Chapter 5 :
 
 
 ## Quotes :
@@ -139,6 +149,9 @@ bad does not mean that we know how to paint.
 19. Every time you write a comment in code, you should grimace and feel the failure of your ability of expression.  
 20. Truth can only be found in one place: the code.   
 21. Commented-out code gathers like dregs at the bottom of a bad bottle of wine.  
+22. Code formatting is about communication, and communication is the professional developer’s first order of business.   
+23. Your style and discipline survives, even though your code does not.  
+24.
 
 
 [1]: https://www.amazon.com/gp/product/B001GSTOAM
