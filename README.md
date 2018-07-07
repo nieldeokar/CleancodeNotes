@@ -92,6 +92,22 @@ Comments to avoid :
 - Don’t Use a Comment When You Can Use a Function or a Variable  
 - Position Markers   
 `// Actions //////////////////////////////////`
+- Closing Brace Comments   
+```
+while{  
+   for(){  
+   }// end of for  
+}// end of while  
+```  
+- Attributions and Bylines  
+`/* Added by Rick *`
+- Commented-Out Code   
+  * Others who see that commented-out code won’t have the courage to delete it. They’ll think it is there for a reason and is too important to delete.
+- HTML Comments
+- Nonlocal Information  
+- Too Much Information *Very long 8-10 lines of comments*
+- Inobvious Connection  
+- Function Headers 
 
 
 
@@ -122,6 +138,7 @@ bad does not mean that we know how to paint.
 18. The proper use of comments is to compensate for our failure to express ourself in code.   
 19. Every time you write a comment in code, you should grimace and feel the failure of your ability of expression.  
 20. Truth can only be found in one place: the code.   
+21. Commented-out code gathers like dregs at the bottom of a bad bottle of wine.  
 
 
 [1]: https://www.amazon.com/gp/product/B001GSTOAM
