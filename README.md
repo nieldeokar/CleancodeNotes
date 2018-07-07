@@ -62,7 +62,41 @@ So then I massage and refine that code, splitting out functions, changing names,
 In the end, I wind up with functions that follow the rules I’ve laid down in this chapter. I don’t write them that way to start. I don’t think anyone could.
 
 
+## Chapter 4 : Comments
+Comments ok to have are :
+- Warning of Consequences  
+- TODO  
+- Amplification  
 
+Comments to avoid :
+- Noise Comments  
+  `protected AnnualDateRule() { } //  Default constructor`  
+- Mandated Comments : It is just plain silly to have a rule that says that every function must have a javadoc, or every variable must have a comment.
+```   
+  // @param title The title of the CD
+  // @param author The author of the CD
+  public void addCD(String title, String author) {
+      CD cd = new CD();
+      cd.title = title;
+      cd.author = author;
+      cdList.add(cd);
+}
+```
+- Scary Noise :
+```
+// The name
+  private String name;
+//  The version
+  private String version;
+```
+- Don’t Use a Comment When You Can Use a Function or a Variable  
+- Position Markers   
+`// Actions //////////////////////////////////`
+
+
+
+
+## Chapter 5 :
 
 
 ## Quotes :
@@ -84,6 +118,10 @@ bad does not mean that we know how to paint.
 14. Choose clarity over entertainment. e.g. `HolyHandGrenade` vs `DeleteItems`.  
 15. Duplication may be the root of all evil in software.  
 16. Master programmers think of systems as stories to be told rather than programs to be written.  
+17. *"Don’t comment bad code rewrite it."* - —Brian W. Kernighan and P. J. Plaugher1  
+18. The proper use of comments is to compensate for our failure to express ourself in code.   
+19. Every time you write a comment in code, you should grimace and feel the failure of your ability of expression.  
+20. Truth can only be found in one place: the code.   
 
 
 [1]: https://www.amazon.com/gp/product/B001GSTOAM
