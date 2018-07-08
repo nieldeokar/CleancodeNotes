@@ -152,6 +152,27 @@ In any given system we will sometimes want the flexibility to add new data types
 Clean code is readable, but it must also be robust. These are not conflicting goals. We can write robust clean code if we see error handling as a separate concern, something that is viewable independently of our main logic. To the degree that we are able to do that, we can reason about it independently, and we can make great strides in the maintainability of our code.
 
 
+## Chapter 8 Boundaries :
+
+If you use a boundary interface like `Map`, keep it inside the class, or close family of classes, where it is used. Avoid returning it from, or accepting it as an argument to, public APIs.
+Rather than using :  
+`Map<Sensor> sensors = new HashMap<Sensor>();`  
+If implementation of `map` changes anytime in future we would have trouble changing the codebase everywhere instead :
+
+`public class Sensors {
+    private Map sensors = new HashMap();  
+
+    public Sensor getById(String id) {   
+       return (Sensor) sensors.get(id);  
+    }  
+}`
+
+- Exploring and learning boundaries :  
+Learning the third-party code is hard. Integrating the third-party code is hard too. Doing both at the same time is doubly hard. What if we took a different approach? Instead of experimenting and trying out the new stuff in our production code, we could write some tests to explore our understanding of the third-party code. Jim Newkirk calls such tests *learning tests*.
+
+- Clean Boundaries  
+Interesting things happen at boundaries. Change is one of those things. Good software designs accommodate change without huge investments and rework. When we use code that is out of our control, special care must be taken to protect our investment and make sure future change is not too costly.  
+Code at the boundaries needs clear separation and tests that define expectations. We should avoid letting too much of our code know about the third-party particulars. It’s better to depend on something you control than on something you don’t control, lest it end up controlling you.
 
 ## Quotes :
 
