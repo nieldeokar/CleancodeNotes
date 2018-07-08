@@ -120,7 +120,23 @@ while{
 - **Conceptual Affinity** Certain bits of code want to be near other bits. They have a certain conceptual affinity. The stronger that affinity, the less vertical distance there should be between them.  
 - **Vertical Ordering** In general we want function call dependencies to point in the downward direction. That is, a function that is called should be below a function that does the calling.
 - Team Rules  
-- [Uncle Bob’s Formatting Rules](Examples/CodeAnalyzer.java) 
+- [Uncle Bob’s Formatting Rules](Examples/CodeAnalyzer.java)
+
+## Chapter 6 Objects and Data Structures :
+We do not want to expose the details of our data. Rather we want to express our data in abstract terms. This is not merely accomplished by using interfaces and/or getters and setters. Serious thought needs to be put into the best way to represent the data that an object contains. The worst option is to blithely add *getters* and *setters*.  
+
+*Procedural code (code using data structures) makes it easy to add new functions without changing the existing data structures. OO code, on the other hand, makes it easy to add new classes without changing existing functions.*
+The complement is also true:  
+*Procedural code makes it hard to add new data structures because all the functions must change. OO code makes it hard to add new functions because all the classes must change.*  
+
+- The method should not invoke methods on objects that are returned by any of the allowed functions. In other words, talk to friends, not to strangers.  
+- Train Wrecks   
+`final String outputDir = ctxt.getOptions().getScratchDir().getAbsolutePath();`  
+  can become :
+  `BufferedOutputStream bos = ctxt.createScratchFileStream(classFileName);
+`
+### Conclusion :
+In any given system we will sometimes want the flexibility to add new data types, and so we prefer objects for that part of the system. Other times we will want the flexibility to add new behaviors, and so in that part of the system we prefer data types and procedures. Good software developers understand these issues without prejudice and choose the approach that is best for the job at hand.
 
 
 
@@ -151,7 +167,10 @@ bad does not mean that we know how to paint.
 21. Commented-out code gathers like dregs at the bottom of a bad bottle of wine.  
 22. Code formatting is about communication, and communication is the professional developer’s first order of business.   
 23. Your style and discipline survives, even though your code does not.  
-24.
+24. Hiding implementation is about abstractions!  
+25. Objects hide their data behind abstractions and expose functions that operate on that data. Data structure expose their data and have no meaningful functions.  
+26. Mature programmers know that the idea that everything is an object is a myth.  
+
 
 
 [1]: https://www.amazon.com/gp/product/B001GSTOAM
