@@ -138,6 +138,18 @@ The complement is also true:
 ### Conclusion :
 In any given system we will sometimes want the flexibility to add new data types, and so we prefer objects for that part of the system. Other times we will want the flexibility to add new behaviors, and so in that part of the system we prefer data types and procedures. Good software developers understand these issues without prejudice and choose the approach that is best for the job at hand.
 
+## Chapter 7 Error Handling :
+
+- Use Exceptions Rather Than Return Codes  
+- Write Your `Try-Catch-Finally` Statement First : When you execute code in the `try` portion of a `try-catch-finally` statement, you are stating that execution can abort at any point and then resume at the `catch`. `try` blocks are like transactions. Your `catch` has to leave your program in a consistent state, no matter what happens in the `try`.   
+- Use Unchecked Exceptions  
+- Provide Context with Exceptions : Create informative error messages and pass them along with your exceptions. Mention the operation that failed and the type of failure. If you are logging in your application, pass along enough information to be able to log the error in your catch.  
+- When we define exception classes in an application, our most important concern should be *how they are caught*.  
+- Don’t Return **Null**.
+- Don’t Pass Null : *Returning null from methods is bad, but passing null into methods is worse*.
+
+## Conclusion
+Clean code is readable, but it must also be robust. These are not conflicting goals. We can write robust clean code if we see error handling as a separate concern, something that is viewable independently of our main logic. To the degree that we are able to do that, we can reason about it independently, and we can make great strides in the maintainability of our code.
 
 
 
