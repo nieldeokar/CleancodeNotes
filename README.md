@@ -195,6 +195,21 @@ If you don’t keep your tests clean, you will lose them. And without them, you 
   - Self-Validating
   - Timely
 
+## Chapter 10 : The Single Responsibility Principle
+
+The Single Responsibility Principle (SRP) states that a class or module should have one, *and only one, reason to change.*  
+
+We want our systems to be composed of many small classes, not a few large ones. Each small class encapsulates a single responsibility, has a single reason to change, and collaborates with a few others to achieve the desired system behaviors.  
+
+Cohesion :  
+Classes should have a small number of instance variables. Each of the methods of a class should manipulate one or more of those variables. In general the more variables a method manipulates the more cohesive that method is to its class. A class in which each variable is used by each method is maximally cohesive.  
+
+
+Isolating from Change :  
+A client class depending upon concrete details is at risk when those details change. We can introduce interfaces and abstract classes to help isolate the impact of those details.
+
+
+
 
 ## Quotes :
 
@@ -227,6 +242,8 @@ bad does not mean that we know how to paint.
 26. Mature programmers know that the idea that everything is an object is a myth.  
 27. Without tests every change is a possible bug.  
 28. If you let the tests rot, then your code will rot too. Keep your tests clean.  
+29. For most systems, change is continual. Every change subjects us to the risk that the remainder of the system no longer works as intended.  
+30. Needs will change, therefore code will change.   
 
 
 
