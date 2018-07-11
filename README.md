@@ -174,6 +174,28 @@ Learning the third-party code is hard. Integrating the third-party code is hard 
 Interesting things happen at boundaries. Change is one of those things. Good software designs accommodate change without huge investments and rework. When we use code that is out of our control, special care must be taken to protect our investment and make sure future change is not too costly.  
 Code at the boundaries needs clear separation and tests that define expectations. We should avoid letting too much of our code know about the third-party particulars. It’s better to depend on something you control than on something you don’t control, lest it end up controlling you.
 
+## Chapter 9 Unit Tests :
+
+#### The Three Laws of TDD
+By now everyone knows that TDD asks us to write unit tests first, before we write production code. But that rule is just the tip of the iceberg. Consider the following three laws:  
+**First Law** : You may not write production code until you have written a failing unit test.  
+**Second Law** : You may not write more of a unit test than is sufficient to fail, and not compiling is failing.  
+**Third Law** : You may not write more production code than is sufficient to pass the currently failing test.  
+
+-  *Test code is just as important as production code*.  
+- Tests Enable the -ilities :
+If you don’t keep your tests clean, you will lose them. And without them, you lose the very thing that keeps your production code flexible.  
+- Clean Tests : What makes a clean test? Three things. Readability, readability, and readability.   
+- One Assert per Test  
+- Single Concept per Test  
+- F.I.R.S.T.
+  - Fast
+  - Independent
+  - Repeatable
+  - Self-Validating
+  - Timely
+
+
 ## Quotes :
 
 1. It was the bad code that brought the company down.  
@@ -203,6 +225,9 @@ bad does not mean that we know how to paint.
 24. Hiding implementation is about abstractions!  
 25. Objects hide their data behind abstractions and expose functions that operate on that data. Data structure expose their data and have no meaningful functions.  
 26. Mature programmers know that the idea that everything is an object is a myth.  
+27. Without tests every change is a possible bug.  
+28. If you let the tests rot, then your code will rot too. Keep your tests clean.  
+
 
 
 
