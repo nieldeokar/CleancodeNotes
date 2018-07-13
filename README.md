@@ -281,7 +281,46 @@ In fact, you’d better know just what your container is doing and how to guard 
 
 **Recommendation**: Keep your concurrency-related code separate from other code.
 
+###### Corollary: Limit the Scope of Data
+When two threads are accessing same set of data we might get unexpected behavior. One solution is to use the `synchronized` keyword to protect a critical section in the code that uses the shared object. It is important to restrict the number of such critical sections. The more places shared data can get updated, the more likely:  
+- You will forget to protect one or more of those places—effectively breaking all code that modifies that shared data.  
+- There will be duplication of effort required to make sure everything is effectively guarded (violation of DRY).  
+- It will be difficult to determine the source of failures, which are already hard enough to find.
 
+**Recommendation**: Take data encapsulation to heart; severely limit the access of any data that may be shared.
+
+###### Corollary: Use Copies of Data  
+A good way to avoid shared data is to avoid sharing the data in the first place. In some situations it is possible to copy objects and treat them as read-only. In other cases it might be possible to copy objects, collect results from multiple threads in these copies and then merge the results in a single thread.  
+If there is *an easy way to avoid sharing objects*, the resulting code will be far less likely to cause problems.
+
+###### Corollary: Threads Should Be as Independent as Possible
+Consider writing your threaded code such that each thread exists in its own world, sharing no data with any other thread. Each thread processes one client request, with all of its required data coming from an unshared source and stored as local variables. This makes each of those threads behave as if it were the only thread in the world and there were no synchronization requirements.  
+
+**Recommendation**: Attempt to partition data into independent subsets than can be operated on by independent threads, possibly in different processors.
+
+###### Know your library :
+
+**Recommendation**: Review the classes available to you. In the case of Java, become familiar with java.util.concurrent, java.util.concurrent.atomic, java.util.concurrent.locks.
+
+###### Know Your Execution Models
+- Bound Resource
+- Mutual Exclusion
+- Starvation
+- Deadlock
+- Livelock
+
+###### Producer-Consumer
+One or more producer threads create some work and place it in a buffer or queue. One or more consumer threads acquire that work from the queue and complete it. The queue between the producers and consumers is a *bound resource*. This means producers must wait for free space in the queue before writing and consumers must wait until there is something in the queue to consume. Coordination between the producers and consumers via the queue involves producers and consumers signaling each other.
+
+###### Readers-Writers
+When you have a shared resource that primarily serves as a source of information for readers, but which is occasionally updated by writers, throughput is an issue. Emphasizing throughput can cause starvation and the accumulation of stale information. Allowing updates can impact throughput. Coordinating readers so they do not read something a writer is updating and vice versa is a tough balancing act. Writers tend to block many readers for a long period of time, thus causing throughput issues.  
+
+###### Dining Philosophers
+
+Imagine a number of philosophers sitting around a circular table. A fork is placed to the left of each philosopher. There is a big bowl of spaghetti in the center of the table. The philosophers spend their time thinking unless they get hungry. Once hungry, they pick up the forks on either side of them and eat. A philosopher cannot eat unless he is holding two forks. If the philosopher to his right or left is already using one of the forks he needs, he must wait until that philosopher finishes eating and puts the forks back down. Once a philosopher eats, he puts both his forks back down on the table and waits until he is hungry again.  
+Replace philosophers with threads and forks with resources and this problem is similar to many enterprise applications in which processes compete for resources. Unless care- fully designed, systems that compete in this way can experience deadlock, livelock, throughput, and efficiency degradation.  
+
+**Recommendation:**  Learn these basic algorithms and understand their solutions.  
 
 
 ## Quotes :
