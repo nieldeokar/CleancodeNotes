@@ -208,6 +208,27 @@ Classes should have a small number of instance variables. Each of the methods of
 Isolating from Change :  
 A client class depending upon concrete details is at risk when those details change. We can introduce interfaces and abstract classes to help isolate the impact of those details.
 
+## Chapter 11 : Systems
+
+*“Complexity kills. It sucks the life out of developers, it makes products difficult to plan, build, and test.”*
+
+#### Separation of Main
+One way to separate construction from use is simply to move all aspects of construction to main, or modules called by main, and to design the rest of the system assuming that all objects have been constructed and wired up appropriately.   
+
+#### Factories  
+Sometimes, of course, we need to make the application responsible for when an object gets created. For example, in an order processing system the application must create the Separating construction in `main()`
+`LineItem` instances to add to an Order. In this case we can use the `ABSTRACT FACTORY` pattern to give the application control of when to build the `LineItems`, but keep the details of that construction separate from the application code.
+
+#### Dependency Injection
+A powerful mechanism for separating construction from use is Dependency Injection (DI).
+
+#### Scaling Up
+Growth is not without pain. How many times have you driven, bumper to bumper through a road “improvement” project and asked yourself, “Why didn’t they build it wide enough the first time!?”. It is a myth that we can get systems “right the first time.” Instead, we should imple- ment only today’s stories, then refactor and expand the system to implement new stories tomorrow.  
+*Software systems are unique compared to physical systems. Their architectures can grow incrementally, if we maintain the proper separation of concerns.*   
+
+#### Test Drive the System Architecture
+The power of separating concerns through aspect-like approaches can’t be overstated. If you can write your application’s domain logic using POJOs, decoupled from any architecture concerns at the code level, then it is possible to truly test drive your architecture.  
+*An optimal system architecture consists of modularized domains of concern, each of which is implemented with Plain Old Java (or other) Objects. The different domains are integrated together with minimally invasive Aspects or Aspect-like tools. This architecture can be test-driven, just like the code.*  
 
 
 
