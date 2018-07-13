@@ -322,6 +322,55 @@ Replace philosophers with threads and forks with resources and this problem is s
 
 **Recommendation:**  Learn these basic algorithms and understand their solutions.  
 
+##### Beware Dependencies Between Synchronized Methods
+Dependencies between synchronized methods cause subtle bugs in concurrent code. The Java language has the notion of synchronized, which protects an individual method. How- ever, if there is more than one synchronized method on the same shared class, then your system may be written incorrectly.   
+Recommendation: Avoid using more than one method on a shared object.
+There will be times when you must use more than one method on a shared object.  
+When this is the case, there are three ways to make the code correct:  
+- Client-Based Locking : Have the client lock the server before calling the first method and make sure the lock’s extent includes code calling the last method.
+- Server-Based Locking : Within the server create a method that locks the server, calls all the methods, and then unlocks. Have the client call the new method.
+- Adapted Server : create an intermediary that performs the locking. This is an example of server-based locking, where the original server cannot be changed.
+
+##### Keep Synchronized Sections Small
+The synchronized keyword introduces a lock. All sections of code guarded by the same lock are guaranteed to have only one thread executing through them at any given time. Locks are expensive because they create delays and add overhead.
+**Recommendation**: Keep your synchronized sections as small as possible.
+
+
+##### Writing Correct Shut-Down Code Is Hard
+Graceful shutdown can be hard to get correct. Common problems involve deadlock, with threads waiting for a signal to continue that never comes.
+
+**Recommendation:** Think about shut-down early and get it working early. It’s going to take longer than you expect. Review existing algorithms because this is probably harder than you think.
+
+##### Testing Threaded Code  
+Proving that code is correct is impractical. Testing does not guarantee correctness. How- ever, good testing can minimize risk. This is all true in a single-threaded solution. As soon as there are two or more threads using the same code and working with shared data, things get substantially more complex.
+
+**Recommendation** : *Write tests that have the potential to expose problems and then run them frequently, with different programatic configurations and system configurations and load. If tests ever fail, track down the failure. Don’t ignore a failure just because the tests pass on a subsequent run.*
+
+- Treat spurious failures as candidate threading issues.  
+- Get your nonthreaded code working first.
+- Make your threaded code pluggable.
+- Make your threaded code tunable.
+- Run with more threads than processors.
+- Run on different platforms.
+- Instrument your code to try and force failures.
+
+##### Treat Spurious Failures as Candidate Threading Issues
+Bugs in threaded code might exhibit their symptoms once in a thousand, or a million, executions.
+
+**Recommendation**: *Do not ignore system failures as one-offs.*
+
+##### Get Your Nonthreaded Code Working First
+Creating POJOs that are called by your threads. The POJOs are not thread aware, and can therefore be tested outside of the threaded environment. The more of your system you can place in such POJOs, the better.  
+**Recommendation**: *Do not try to chase down nonthreading bugs and threading bugs at the same time. Make sure your code works outside of threads.*  
+
+##### Make Your Threaded Code Pluggable
+Write the concurrency-supporting code such that it can be run in several configurations:
+- One thread, several threads, varied as it executes
+- Threaded code interacts with something that can be both real or a test double.
+- Execute with test doubles that run quickly, slowly, variable.
+- Configure tests so they can run for a number of iterations.
+**Recommendation**: *Make your thread-based code especially pluggable so that you can run it in various configurations.*
+
 
 ## Quotes :
 
@@ -358,7 +407,9 @@ bad does not mean that we know how to paint.
 30. Needs will change, therefore code will change.   
 31. The fact that we have tests, eliminates the fear that cleaning up the code will break it!  
 32. Duplication is the primary enemy of a well-designed system.  
-33. It’s easy to write code that *we* understand, but to write a code which can be understood by everyone takes real efforts.
+33. It’s easy to write code that *we* understand, but to write a code which can be understood by everyone takes real efforts.  
+34. Proving that code is correct is impractical.
+35. Testing does not guarantee correctness. However, good testing minimizes the risk.
 
 
 
