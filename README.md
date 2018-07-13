@@ -253,7 +253,35 @@ Whether you are designing systems or individual modules, *never forget to use th
 4. Minimizes the number of classes and methods.
 
 ### Conclusion
-Is there a set of simple practices that can replace experience? Clearly not. On the other hand, the practices described in this chapter and in this book are a crystallized form of the many decades of experience enjoyed by the authors. Following the practice of simple design can and does encourage and enable developers to adhere to good principles and patterns that otherwise take years to learn.
+Is there a set of simple practices that can replace experience? Clearly not. On the other hand, the practices described in this chapter and in this book are a crystallized form of the many decades of experience enjoyed by the authors. Following the practice of simple design can and does encourage and enable developers to adhere to good principles and patterns that otherwise take years to learn.  
+
+## Chapter 13 : Concurrency
+Writing clean concurrent programs is hard—very hard. It is much easier to write code that executes in a single thread. It is also easy to write multithreaded code that looks fine on the surface but is broken at a deeper level. Such code works fine until the system is placed under stress.
+
+#### Myths and Misconceptions
+And so there are compelling reasons to adopt concurrency. However, as we said before, concurrency is hard. If you aren’t very careful, you can create some very nasty situations. Consider these common myths and misconceptions:  
+- *Concurrency always improves performance.*  
+Concurrency can sometimes improve performance, but only when there is a lot of wait time that can be shared between multiple threads or multiple processors. Neither situation is trivial.  
+- *Design does not change when writing concurrent programs.*  
+In fact, the design of a concurrent algorithm can be remarkably different from the design of a single-threaded system. The decoupling of what from when usually has a huge effect on the structure of the system.  
+- *Understanding concurrency issues is not important when working with a container such as a Web or EJB container.*  
+In fact, you’d better know just what your container is doing and how to guard against the issues of concurrent update and deadlock.
+
+- *Concurrency incurs some overhead, both in performance as well as writing additional code.*
+- *Correct concurrency is complex, even for simple problems.*  
+- *Concurrency bugs aren’t usually repeatable, so they are often ignored as one-offs instead of the true defects they are.*  
+- *Concurrency often requires a fundamental change in design strategy.*
+
+#### Concurrency Defense Principles
+
+###### Single Responsibility Principle
+  - Concurrency-related code has its own life cycle of development, change, and tuning.
+  - Concurrency-related code has its own challenges, which are different from and often more difficult than nonconcurrency-related code.  
+  - The number of ways in which miswritten concurrency-based code can fail makes it challenging enough without the added burden of surrounding application code.   
+
+**Recommendation**: Keep your concurrency-related code separate from other code.
+
+
 
 
 ## Quotes :
