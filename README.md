@@ -371,6 +371,25 @@ Write the concurrency-supporting code such that it can be run in several configu
 - Configure tests so they can run for a number of iterations.
 **Recommendation**: *Make your thread-based code especially pluggable so that you can run it in various configurations.*
 
+##### Make Your Threaded Code Tunable  
+Getting the right balance of threads typically requires trial an error. Early on, find ways to time the performance of your system under different configurations. Allow the number of threads to be easily tuned. Consider allowing it to change while the system is running.
+Consider allowing self-tuning based on throughput and system utilization.
+
+##### Run with More Threads Than Processors
+Things happen when the system switches between tasks. To encourage task swapping, run with more threads than processors or cores.  
+
+##### Run on Different Platforms
+Testing on different machines and platform reinforces the fact that different operating systems have different threading policies, each of which impacts the code’s execution.   
+**Recommendation**: *Run your threaded code on all target platforms early and often.*
+
+##### Instrument Your Code to Try and Force Failures
+The reason that threading bugs can be infrequent, sporadic, and hard to repeat, is that only a very few pathways out of the many thousands of possible pathways through a vulnerable section actually fail.   
+There are two options for code instrumentation:  
+
+• Hand-coded   
+• Automated  
+
+
 
 ## Quotes :
 
