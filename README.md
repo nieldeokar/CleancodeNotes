@@ -391,6 +391,9 @@ There are two options for code instrumentation:
 
 ## Chapter 14 : Successive Refinement
 
+It is not enough for code to work. Code that works is often badly broken. Programmers who satisfy themselves with merely working code are behaving unprofessionally. They may fear that they don’t have time to improve the structure and design of their code, but I disagree. Nothing has a more profound and long-term degrading effect upon a development project than bad code. Bad schedules can be redone, bad requirements can be rede- fined. Bad team dynamics can be repaired. But bad code rots and ferments, becoming an inexorable weight that drags the team down. Time and time again I have seen teams grind to a crawl because, in their haste, they created a malignant morass of code that forever thereafter dominated their destiny.
+Of course bad code can be cleaned up. But it’s very expensive. As code rots, the modules insinuate themselves into each other, creating lots of hidden and tangled dependencies. Finding and breaking old dependencies is a long and arduous task. On the other hand, keeping code clean is relatively easy. If you made a mess in a module in the morning, it is easy to clean it up in the afternoon. Better yet, if you made a mess five minutes ago, it’s very easy to clean it up right now.
+So the solution is to continuously keep your code as clean and simple as it can be. Never let the rot get started.
 
 
 ## Quotes :
@@ -434,6 +437,15 @@ bad does not mean that we know how to paint.
 36. Programming is a craft more than it is a science.  
 37. To write clean code, you must first write dirty code and *then clean it.*  
 38. Leaving the “working” program in whatever state you finally got it to “work” is a professional suicide.  
+39. It is not enough for code to work. Code that works is often badly broken.  
+40. Programmers who satisfy themselves with merely working code are behaving unprofessionally.
+41. Bad schedules can be redone, bad requirements can be redefined. Bad team dynamics can be repaired but bad code can not be.
+42. Bad code rots and ferments, becoming an inexorable weight that drags the team down.
+43. As code rots, the modules insinuate themselves into each other, creating lots of hidden and tangled dependencies.
+44. Finding and breaking old dependencies is a long and arduous task. On the other hand, keeping code clean is relatively easy.
+45. If you made a mess in a module in the morning, it is easy to clean it up in the afternoon. Better yet, if you made a mess five minutes ago, it’s very easy to clean it up right now.
+46. Never let the rot get started and your code would be as clean and simple as it can be.
+
 
 
 [1]: https://www.amazon.com/gp/product/B001GSTOAM
