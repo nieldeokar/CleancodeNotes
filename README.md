@@ -389,6 +389,8 @@ There are two options for code instrumentation:
 • Hand-coded   
 • Automated  
 
+## Chapter 14 : Successive Refinement
+
 
 
 ## Quotes :
@@ -429,7 +431,9 @@ bad does not mean that we know how to paint.
 33. It’s easy to write code that *we* understand, but to write a code which can be understood by everyone takes real efforts.  
 34. Proving that code is correct is impractical.
 35. Testing does not guarantee correctness. However, good testing minimizes the risk.
-
+36. Programming is a craft more than it is a science.  
+37. To write clean code, you must first write dirty code and *then clean it.*  
+38. Leaving the “working” program in whatever state you finally got it to “work” is a professional suicide.  
 
 
 [1]: https://www.amazon.com/gp/product/B001GSTOAM
