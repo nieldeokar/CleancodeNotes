@@ -244,6 +244,18 @@ Systems must be clean too. An invasive architecture overwhelms the domain logic 
 At all levels of abstraction, the intent should be clear. This will only happen if you write POJOs and you use aspect-like mechanisms to incorporate other implementation concerns noninvasively.
 Whether you are designing systems or individual modules, *never forget to use the simplest thing that can possibly work.*
 
+## Chapter 12 : Emergence
+
+#### Kent Beck’s four rules of Simple Design :  
+1. Runs all the tests.  
+2. Contains no duplication.  
+3. Expresses the intent of the programmer.  
+4. Minimizes the number of classes and methods.
+
+### Conclusion
+Is there a set of simple practices that can replace experience? Clearly not. On the other hand, the practices described in this chapter and in this book are a crystallized form of the many decades of experience enjoyed by the authors. Following the practice of simple design can and does encourage and enable developers to adhere to good principles and patterns that otherwise take years to learn.
+
+
 ## Quotes :
 
 1. It was the bad code that brought the company down.  
@@ -277,7 +289,9 @@ bad does not mean that we know how to paint.
 28. If you let the tests rot, then your code will rot too. Keep your tests clean.  
 29. For most systems, change is continual. Every change subjects us to the risk that the remainder of the system no longer works as intended.  
 30. Needs will change, therefore code will change.   
-
+31. The fact that we have tests, eliminates the fear that cleaning up the code will break it!  
+32. Duplication is the primary enemy of a well-designed system.  
+33. It’s easy to write code that *we* understand, but to write a code which can be understood by everyone takes real efforts.
 
 
 
