@@ -253,7 +253,142 @@ Whether you are designing systems or individual modules, *never forget to use th
 4. Minimizes the number of classes and methods.
 
 ### Conclusion
-Is there a set of simple practices that can replace experience? Clearly not. On the other hand, the practices described in this chapter and in this book are a crystallized form of the many decades of experience enjoyed by the authors. Following the practice of simple design can and does encourage and enable developers to adhere to good principles and patterns that otherwise take years to learn.
+Is there a set of simple practices that can replace experience? Clearly not. On the other hand, the practices described in this chapter and in this book are a crystallized form of the many decades of experience enjoyed by the authors. Following the practice of simple design can and does encourage and enable developers to adhere to good principles and patterns that otherwise take years to learn.  
+
+## Chapter 13 : Concurrency
+Writing clean concurrent programs is hard—very hard. It is much easier to write code that executes in a single thread. It is also easy to write multithreaded code that looks fine on the surface but is broken at a deeper level. Such code works fine until the system is placed under stress.
+
+#### Myths and Misconceptions
+And so there are compelling reasons to adopt concurrency. However, as we said before, concurrency is hard. If you aren’t very careful, you can create some very nasty situations. Consider these common myths and misconceptions:  
+- *Concurrency always improves performance.*  
+Concurrency can sometimes improve performance, but only when there is a lot of wait time that can be shared between multiple threads or multiple processors. Neither situation is trivial.  
+- *Design does not change when writing concurrent programs.*  
+In fact, the design of a concurrent algorithm can be remarkably different from the design of a single-threaded system. The decoupling of what from when usually has a huge effect on the structure of the system.  
+- *Understanding concurrency issues is not important when working with a container such as a Web or EJB container.*  
+In fact, you’d better know just what your container is doing and how to guard against the issues of concurrent update and deadlock.
+
+- *Concurrency incurs some overhead, both in performance as well as writing additional code.*
+- *Correct concurrency is complex, even for simple problems.*  
+- *Concurrency bugs aren’t usually repeatable, so they are often ignored as one-offs instead of the true defects they are.*  
+- *Concurrency often requires a fundamental change in design strategy.*
+
+#### Concurrency Defense Principles
+
+###### Single Responsibility Principle
+  - Concurrency-related code has its own life cycle of development, change, and tuning.
+  - Concurrency-related code has its own challenges, which are different from and often more difficult than nonconcurrency-related code.  
+  - The number of ways in which miswritten concurrency-based code can fail makes it challenging enough without the added burden of surrounding application code.   
+
+**Recommendation**: Keep your concurrency-related code separate from other code.
+
+###### Corollary: Limit the Scope of Data
+When two threads are accessing same set of data we might get unexpected behavior. One solution is to use the `synchronized` keyword to protect a critical section in the code that uses the shared object. It is important to restrict the number of such critical sections. The more places shared data can get updated, the more likely:  
+- You will forget to protect one or more of those places—effectively breaking all code that modifies that shared data.  
+- There will be duplication of effort required to make sure everything is effectively guarded (violation of DRY).  
+- It will be difficult to determine the source of failures, which are already hard enough to find.
+
+**Recommendation**: Take data encapsulation to heart; severely limit the access of any data that may be shared.
+
+###### Corollary: Use Copies of Data  
+A good way to avoid shared data is to avoid sharing the data in the first place. In some situations it is possible to copy objects and treat them as read-only. In other cases it might be possible to copy objects, collect results from multiple threads in these copies and then merge the results in a single thread.  
+If there is *an easy way to avoid sharing objects*, the resulting code will be far less likely to cause problems.
+
+###### Corollary: Threads Should Be as Independent as Possible
+Consider writing your threaded code such that each thread exists in its own world, sharing no data with any other thread. Each thread processes one client request, with all of its required data coming from an unshared source and stored as local variables. This makes each of those threads behave as if it were the only thread in the world and there were no synchronization requirements.  
+
+**Recommendation**: Attempt to partition data into independent subsets than can be operated on by independent threads, possibly in different processors.
+
+###### Know your library :
+
+**Recommendation**: Review the classes available to you. In the case of Java, become familiar with java.util.concurrent, java.util.concurrent.atomic, java.util.concurrent.locks.
+
+###### Know Your Execution Models
+- Bound Resource
+- Mutual Exclusion
+- Starvation
+- Deadlock
+- Livelock
+
+###### Producer-Consumer
+One or more producer threads create some work and place it in a buffer or queue. One or more consumer threads acquire that work from the queue and complete it. The queue between the producers and consumers is a *bound resource*. This means producers must wait for free space in the queue before writing and consumers must wait until there is something in the queue to consume. Coordination between the producers and consumers via the queue involves producers and consumers signaling each other.
+
+###### Readers-Writers
+When you have a shared resource that primarily serves as a source of information for readers, but which is occasionally updated by writers, throughput is an issue. Emphasizing throughput can cause starvation and the accumulation of stale information. Allowing updates can impact throughput. Coordinating readers so they do not read something a writer is updating and vice versa is a tough balancing act. Writers tend to block many readers for a long period of time, thus causing throughput issues.  
+
+###### Dining Philosophers
+
+Imagine a number of philosophers sitting around a circular table. A fork is placed to the left of each philosopher. There is a big bowl of spaghetti in the center of the table. The philosophers spend their time thinking unless they get hungry. Once hungry, they pick up the forks on either side of them and eat. A philosopher cannot eat unless he is holding two forks. If the philosopher to his right or left is already using one of the forks he needs, he must wait until that philosopher finishes eating and puts the forks back down. Once a philosopher eats, he puts both his forks back down on the table and waits until he is hungry again.  
+Replace philosophers with threads and forks with resources and this problem is similar to many enterprise applications in which processes compete for resources. Unless care- fully designed, systems that compete in this way can experience deadlock, livelock, throughput, and efficiency degradation.  
+
+**Recommendation:**  Learn these basic algorithms and understand their solutions.  
+
+##### Beware Dependencies Between Synchronized Methods
+Dependencies between synchronized methods cause subtle bugs in concurrent code. The Java language has the notion of synchronized, which protects an individual method. How- ever, if there is more than one synchronized method on the same shared class, then your system may be written incorrectly.   
+Recommendation: Avoid using more than one method on a shared object.
+There will be times when you must use more than one method on a shared object.  
+When this is the case, there are three ways to make the code correct:  
+- Client-Based Locking : Have the client lock the server before calling the first method and make sure the lock’s extent includes code calling the last method.
+- Server-Based Locking : Within the server create a method that locks the server, calls all the methods, and then unlocks. Have the client call the new method.
+- Adapted Server : create an intermediary that performs the locking. This is an example of server-based locking, where the original server cannot be changed.
+
+##### Keep Synchronized Sections Small
+The synchronized keyword introduces a lock. All sections of code guarded by the same lock are guaranteed to have only one thread executing through them at any given time. Locks are expensive because they create delays and add overhead.
+**Recommendation**: Keep your synchronized sections as small as possible.
+
+
+##### Writing Correct Shut-Down Code Is Hard
+Graceful shutdown can be hard to get correct. Common problems involve deadlock, with threads waiting for a signal to continue that never comes.
+
+**Recommendation:** Think about shut-down early and get it working early. It’s going to take longer than you expect. Review existing algorithms because this is probably harder than you think.
+
+##### Testing Threaded Code  
+Proving that code is correct is impractical. Testing does not guarantee correctness. How- ever, good testing can minimize risk. This is all true in a single-threaded solution. As soon as there are two or more threads using the same code and working with shared data, things get substantially more complex.
+
+**Recommendation** : *Write tests that have the potential to expose problems and then run them frequently, with different programatic configurations and system configurations and load. If tests ever fail, track down the failure. Don’t ignore a failure just because the tests pass on a subsequent run.*
+
+- Treat spurious failures as candidate threading issues.  
+- Get your nonthreaded code working first.
+- Make your threaded code pluggable.
+- Make your threaded code tunable.
+- Run with more threads than processors.
+- Run on different platforms.
+- Instrument your code to try and force failures.
+
+##### Treat Spurious Failures as Candidate Threading Issues
+Bugs in threaded code might exhibit their symptoms once in a thousand, or a million, executions.
+
+**Recommendation**: *Do not ignore system failures as one-offs.*
+
+##### Get Your Nonthreaded Code Working First
+Creating POJOs that are called by your threads. The POJOs are not thread aware, and can therefore be tested outside of the threaded environment. The more of your system you can place in such POJOs, the better.  
+**Recommendation**: *Do not try to chase down nonthreading bugs and threading bugs at the same time. Make sure your code works outside of threads.*  
+
+##### Make Your Threaded Code Pluggable
+Write the concurrency-supporting code such that it can be run in several configurations:
+- One thread, several threads, varied as it executes
+- Threaded code interacts with something that can be both real or a test double.
+- Execute with test doubles that run quickly, slowly, variable.
+- Configure tests so they can run for a number of iterations.
+**Recommendation**: *Make your thread-based code especially pluggable so that you can run it in various configurations.*
+
+##### Make Your Threaded Code Tunable  
+Getting the right balance of threads typically requires trial an error. Early on, find ways to time the performance of your system under different configurations. Allow the number of threads to be easily tuned. Consider allowing it to change while the system is running.
+Consider allowing self-tuning based on throughput and system utilization.
+
+##### Run with More Threads Than Processors
+Things happen when the system switches between tasks. To encourage task swapping, run with more threads than processors or cores.  
+
+##### Run on Different Platforms
+Testing on different machines and platform reinforces the fact that different operating systems have different threading policies, each of which impacts the code’s execution.   
+**Recommendation**: *Run your threaded code on all target platforms early and often.*
+
+##### Instrument Your Code to Try and Force Failures
+The reason that threading bugs can be infrequent, sporadic, and hard to repeat, is that only a very few pathways out of the many thousands of possible pathways through a vulnerable section actually fail.   
+There are two options for code instrumentation:  
+
+• Hand-coded   
+• Automated  
+
 
 
 ## Quotes :
@@ -291,7 +426,9 @@ bad does not mean that we know how to paint.
 30. Needs will change, therefore code will change.   
 31. The fact that we have tests, eliminates the fear that cleaning up the code will break it!  
 32. Duplication is the primary enemy of a well-designed system.  
-33. It’s easy to write code that *we* understand, but to write a code which can be understood by everyone takes real efforts.
+33. It’s easy to write code that *we* understand, but to write a code which can be understood by everyone takes real efforts.  
+34. Proving that code is correct is impractical.
+35. Testing does not guarantee correctness. However, good testing minimizes the risk.
 
 
 
