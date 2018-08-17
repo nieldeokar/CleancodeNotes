@@ -444,7 +444,9 @@ bad does not mean that we know how to paint.
 43. As code rots, the modules insinuate themselves into each other, creating lots of hidden and tangled dependencies.
 44. Finding and breaking old dependencies is a long and arduous task. On the other hand, keeping code clean is relatively easy.
 45. If you made a mess in a module in the morning, it is easy to clean it up in the afternoon. Better yet, if you made a mess five minutes ago, it’s very easy to clean it up right now.
-46. Never let the rot get started and your code would be as clean and simple as it can be.
+46. Never let the rot get started and your code would be as clean and simple as it can be.  
+47. The center of your application is not the database. Nor is it one or more of the frameworks you may be using. The center of your application is the use cases of your application.  
+
 
 
 
